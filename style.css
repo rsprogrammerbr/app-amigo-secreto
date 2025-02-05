@@ -8,16 +8,18 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .main-content {
-    width: 200%;
+    width: 90%;
     max-width: 500px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1); /* Transparente */
+    backdrop-filter: blur(50px); /* Aumenta o efeito de blur */
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
+
 .header-banner img {
     width: 400px;
     margin: 10px 0;
@@ -36,6 +38,13 @@ body {
     color: #fff;
     outline: none;
 }
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .button-add, .button-draw {
     background: #4f46e5;
     color: #fff;
@@ -48,13 +57,26 @@ body {
 .button-add:hover, .button-draw:hover {
     background: #6366f1;
 }
+
 .button-draw {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 20px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
 }
+
+.button-draw:hover {
+    background: #6366f1;
+}
+
 .button-draw img {
     width: 20px;
 }
