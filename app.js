@@ -6,11 +6,13 @@ function adicionarAmigo() {
 
     if (!nome) {
         alert("Digite um nome!");
+        document.getElementById("amigo").value = "";
         return;
     }
 
     if (/\d/.test(nome)) {
         alert("O nome não pode conter números!");
+        document.getElementById("amigo").value = "";
         return;
     }
 
@@ -18,6 +20,7 @@ function adicionarAmigo() {
 
     if (nomesAdicionados.includes(nome)) {
         alert("Este nome já foi adicionado!");
+        document.getElementById("amigo").value = "";
         return;
     }
 
@@ -108,6 +111,7 @@ function setDisplay(elementIds, displayValue) {
 function sortearAmigo() {
     if (nomesAdicionados.length < 2) {
         alert("Adicione pelo menos dois amigos para sortear!");
+        document.getElementById("amigo").value = "";
         return;
     }
 
