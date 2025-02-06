@@ -104,3 +104,40 @@ body {
     border-radius: 10px;
     backdrop-filter: blur(5px);
 }
+
+.button-reset {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #e63946;
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.button-reset:hover {
+    background: #33fb2d;
+}
+
+/* Estilo para o botão "Baixar Lista" */
+.button-download {
+    background: #28a745; /* Cor de sucesso/download */
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    margin-left: 10px; /* Espaçamento entre botões */
+}
+
+.button-download:hover {
+    background: #3cb371; /* Cor mais clara no hover */
+}
