@@ -6,8 +6,44 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, input, textarea, button {
     box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho do elemento */
 }
 
-body {
+/* body {
     background: linear-gradient(to bottom, #5e5e5e, #090a0b);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+    padding-bottom: 40px;
+} */
+
+
+/* body {
+   background-image: url('assets/background_presentes.png');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-position: center center; 
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+    padding-bottom: 40px; 
+} */
+
+body {
+    /* background: linear-gradient(to bottom, #5e5e5e, #090a0b);  Remova ou comente essa linha */
+    background-image: 
+        
+        url('assets/background_presentes.PNG'); /* Substitua pelo caminho da sua imagem */
+    background-size: cover; /* A imagem cobre todo o body */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-attachment: fixed; /* Mantém a imagem fixa durante a rolagem */
+    background-position: center center; /* Centraliza a imagem */
     color: #ffffff;
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -25,12 +61,17 @@ body {
     backdrop-filter: blur(10px); /* Aumenta o efeito de blur */
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(250, 250, 250, 0.641);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.641);
     text-align: center;
 
     display: flex;          /* Adiciona flexbox */
     flex-direction: column; /* Organiza os itens em coluna */
     align-items: center;    /* Centraliza os itens horizontalmente */
+
+    position: relative; /* Cria um contexto de empilhamento */
+    z-index: 1;  /* Outros estilos... */
+
+
 }
 
 .main-title {
@@ -46,15 +87,34 @@ body {
     display: flex;
     gap: 10px;
     justify-content: center;
+    
+    
 }
+
+/* .input-name {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    outline: none;
+    backdrop-filter: blur(100px); 
+} */
+
 .input-name {
     flex: 1;
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: rgba(192, 191, 191, 0.7); /* Aumenta a opacidade do fundo */
+    color: #333; /* Muda a cor do texto para um tom mais escuro */
     outline: none;
+    font-size: 16px; /* Aumenta o tamanho da fonte */
+}
+
+.input-name::placeholder {
+    color: #ffffff; /* Ajusta a cor do placeholder para melhor legibilidade */
 }
 
 .button-container {
@@ -243,6 +303,7 @@ body {
     font-size: 0.8em;
     backdrop-filter: blur(20px);
     z-index: 100; /* Garante que o footer fique sempre na frente */
+    
 }
 
 /* Oculta a notificação inicialmente */
@@ -316,5 +377,8 @@ body {
 }
 
 .section-title {
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+
 }
+

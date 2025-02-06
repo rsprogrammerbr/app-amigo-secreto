@@ -151,6 +151,7 @@ function setDisplay(elementIds, displayValue) {
 }
 
 
+
 function sortearAmigo() {
     if (participantes.length < 2) {
         showAlert("Adicione pelo menos dois amigos para sortear!");
@@ -181,14 +182,16 @@ function sortearAmigo() {
         resultadosSorteio[participantes[i].nome] = sorteados[(i + 1) % participantes.length].nome;
     }
 
-    // Para cada participante, mostra um botão para verificar o resultado com a senha
     participantes.forEach(participante => {
         const botaoVerificar = document.createElement("button");
         botaoVerificar.textContent = `Verificar sorteio de ${participante.nome}`;
         botaoVerificar.classList.add("button-verificar");
-        botaoVerificar.onclick = () => verificarSenha(participante.nome, resultadosSorteio[participante.nome]);
+        botaoVerificar.onclick = function() { // Mudança aqui
+            verificarSenha(participante.nome, resultadosSorteio[participante.nome]);
+        };
         resultado.appendChild(botaoVerificar);
     });
+
 
     soltarConfetes();
 
@@ -212,31 +215,6 @@ function sortearAmigo() {
     }
 }
 
-function mostrarResultado(message) {
-    const customAlert = document.getElementById("custom-alert");
-    const customAlertMessage = document.getElementById("custom-alert-message");
-    const customAlertOk = document.getElementById("custom-alert-ok");
-
-    customAlertMessage.textContent = message;
-    customAlert.style.display = "flex"; // Exibe o modal
-
-    customAlertOk.onclick = function() {
-        customAlert.style.display = "none"; // Oculta o modal
-    };
-}
-
-
-function verificarSenha(nome, amigoSorteado) {
-    const senha = prompt(`Digite a senha para ${nome}:`);
-    const participante = participantes.find(p => p.nome === nome);
-
-    if (participante && senha === participante.senha) {
-        mostrarResultado(`${nome} tirou ${amigoSorteado}!`); // Usa a nova função
-
-    } else {
-        showAlert("Senha incorreta!");
-    }
-}
 
 function reiniciarSorteio() {
     pararConfetes();
@@ -271,3 +249,31 @@ function reiniciarSorteio() {
         console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
     }
 }
+
+
+function mostrarResultado(message) {
+    const customAlert = document.getElementById("custom-alert");
+    const customAlertMessage = document.getElementById("custom-alert-message");
+    const customAlertOk = document.getElementById("custom-alert-ok");
+
+    customAlertMessage.textContent = message;
+    customAlert.style.display = "flex"; // Exibe o modal
+
+    customAlertOk.onclick = function() {
+        customAlert.style.display = "none"; // Oculta o modal
+    };
+}
+
+
+function verificarSenha(nome, amigoSorteado) {
+    const senha = prompt(`Digite a senha para ${nome}:`);
+    const participante = participantes.find(p => p.nome === nome);
+
+    if (participante && senha === participante.senha) {
+        mostrarResultado(`${nome} tirou ${amigoSorteado}!`); // Usa a nova função
+
+    } else {
+        showAlert("Senha incorreta!");
+    }
+}
+
