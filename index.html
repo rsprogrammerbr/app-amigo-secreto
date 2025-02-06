@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Configurações básicas do documento HTML -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
@@ -10,24 +11,33 @@
     <title>Caixa do Amigo Secreto</title>
 </head>
 <body>
+   <!-- Canvas para a animação de confetes -->
    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none;"></canvas>
+    <!-- Conteúdo principal da página -->
     <main class="main-content">
+        <!-- Cabeçalho com o título e a imagem do amigo secreto -->
         <header class="header-banner">
             <h1 class="main-title">Caixa do Amigo Secreto</h1>
             <img src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
         </header>
         
+        <!-- Seção para inserir o nome dos amigos e realizar o sorteio -->
         <section class="input-section" id="input-section">
+            <!-- Título da seção -->
             <h2 class="section-title" id="titulo-amigos">Digite o nome dos seus amigos</h2>
+            <!-- Container para os inputs de nome, senha e botão de adicionar -->
             <div class="input-wrapper" id="input-wrapper">
-                <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
+                <input type="text" id="amigo" class="input-name" placeholder="Digite um nome" autofocus>
                 <input type="password" id="senha" class="input-name" placeholder="Digite uma senha">
                 <button class="button-add" onclick="adicionarAmigo()">Adicionar</button>
             </div>
            
+            <!-- Lista para exibir os amigos adicionados -->
             <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+            <!-- Lista para exibir o resultado do sorteio (inicialmente vazia) -->
             <ul id="resultado" class="result-list" aria-live="polite"></ul>
 
+            <!-- Container para os botões de sortear e novo sorteio -->
             <div class="button-container">
                 <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
                     <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
@@ -38,6 +48,7 @@
                 </button>
             </div>
 
+            <!-- Modal de alerta personalizado -->
             <div id="custom-alert" class="custom-alert">
                 <div class="custom-alert-content">
                     <p id="custom-alert-message"></p>
@@ -49,10 +60,15 @@
         </section>
     </main>
 
+    <!-- Rodapé da página -->
     <footer class="footer">
         <p>Challenge Amigo Secreto - Rodrigo Silva - 2025</p>
     </footer>
+
+    <!-- Scripts -->
+    <!-- Biblioteca para síntese de voz -->
     <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+    <!-- Script para inicializar o responsiveVoice ao carregar a página -->
     <script>
         window.onload = function() {
           if (responsiveVoice) {
@@ -63,8 +79,11 @@
         };
       </script>
     
+    <!-- Biblioteca para animação de confetes -->
     <script src="https://cdn.jsdelivr.net/npm/confetti-js"></script>
+    <!-- Elemento de áudio para tocar um som de alegria -->
     <audio id="audio-alegria" src="assets/audio_alegria.mp3" preload="auto"></audio>
+    <!-- Script principal da aplicação -->
     <script src="/app.js" defer></script>
 </body>
 </html>
