@@ -96,6 +96,15 @@ function salvarListaSorteio(amigos, sorteados) {
 }
 
 
+function setDisplay(elementIds, displayValue) {
+    elementIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = displayValue;
+        }
+    });
+}
+
 function sortearAmigo() {
     if (nomesAdicionados.length < 2) {
         alert("Adicione pelo menos dois amigos para sortear!");
@@ -104,6 +113,9 @@ function sortearAmigo() {
 
     const lista = document.getElementById("listaAmigos");
     lista.style.display = "none";
+
+    // Oculta os elementos de entrada
+    setDisplay(["titulo-amigos", "input-wrapper", "amigo", "botao-adicionar"], "none");
 
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = "";
@@ -139,29 +151,33 @@ function sortearAmigo() {
 }
 
 function reiniciarSorteio() {
-  pararConfetes();
+    pararConfetes();
 
-  const listaAmigos = document.getElementById("listaAmigos");
-  while (listaAmigos.firstChild) {
-    listaAmigos.removeChild(listaAmigos.firstChild);
-  }
-  listaAmigos.style.display = "block";
+    const listaAmigos = document.getElementById("listaAmigos");
+    while (listaAmigos.firstChild) {
+        listaAmigos.removeChild(listaAmigos.firstChild);
+    }
+    listaAmigos.style.display = "block";
 
-  nomesAdicionados = [];
+    nomesAdicionados = []; // Limpa o array de nomes
 
-  const resultado = document.getElementById("resultado");
-  resultado.innerHTML = "";
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = "";
 
-  // Mostra novamente o botão "Sortear amigo"
-  document.querySelector(".button-draw").style.display = "flex";
+    // Mostra novamente o botão "Sortear amigo"
+    document.querySelector(".button-draw").style.display = "flex";
 
-  // Remove o botão "Baixar Lista"
-  const botaoBaixar = document.querySelector(".button-download");
-  if (botaoBaixar) {
-    botaoBaixar.remove();
-  }
+    // Remove o botão "Baixar Lista"
+    const botaoBaixar = document.querySelector(".button-download");
+    if (botaoBaixar) {
+        botaoBaixar.remove();
+    }
 
-  document.getElementById("button-reset").style.display = "none";
+    document.getElementById("button-reset").style.display = "none";
+
+    // Mostra os elementos de entrada novamente
+    setDisplay(["titulo-amigos"], "block");
+    setDisplay(["input-wrapper"], "flex");
+    setDisplay(["amigo"], "block");
+    setDisplay(["botao-adicionar"], "inline-block");
 }
-
-
