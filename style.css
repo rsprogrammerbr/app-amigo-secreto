@@ -274,3 +274,20 @@ body {
 .rvnotification .rvdeny {
     display: none !important;
 }
+
+
+.button-verificar {
+    background: #28a745; /* Cor de sucesso/download */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    margin-top: 5px; /* Espaçamento entre botões */
+}
+
+.button-verificar:hover {
+    background: #3cb371; /* Cor mais clara no hover */
+}
