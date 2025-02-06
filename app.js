@@ -26,4 +26,31 @@ function sortearAmigo() {
         li.textContent = `${amigos[i]} -> ${sorteados[(i + 1) % amigos.length]}`;
         resultado.appendChild(li);
     }
+    soltarConfetes();
 }
+
+function soltarConfetes() {
+    const confettiSettings = {
+        target: 'confetti-canvas',
+        max: 100,
+        size: 1.5,
+        animate: true,
+        props: ['circle', 'square', 'triangle'],
+        colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]],
+        clock: 25,
+        rotate: true,
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+    const confetti = new ConfettiGenerator(confettiSettings);
+    confetti.render();
+    
+    setTimeout(() => {
+        const canvas = document.getElementById('confetti-canvas');
+        if (canvas) {
+            canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }, 2000); // Confetes desaparecem após 2 segundos
+}
+
+
