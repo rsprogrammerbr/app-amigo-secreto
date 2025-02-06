@@ -141,3 +141,19 @@ body {
 .button-download:hover {
     background: #3cb371; /* Cor mais clara no hover */
 }
+
+
+/* Estilo para o botão de remoção */
+.button-remover {
+    background: none; /* Fundo transparente */
+    border: none; /* Sem borda */
+    color: #ff6347; /* Cor vermelha */
+    cursor: pointer; /* Cursor de mãozinha */
+    font-size: 1em; /* Tamanho da fonte */
+    margin-left: 8px; /* Espaçamento à esquerda */
+    padding: 0; /* Sem preenchimento */
+}
+
+.button-remover:hover {
+    color: #dc143c; /* Vermelho mais escuro no hover */
+}

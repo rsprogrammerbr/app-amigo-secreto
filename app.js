@@ -1,14 +1,47 @@
+let nomesAdicionados = []; // Array para armazenar os nomes adicionados
+
 function adicionarAmigo() {
     const input = document.getElementById("amigo");
-    const nome = input.value.trim();
-    if (nome) {
-        const lista = document.getElementById("listaAmigos");
-        const item = document.createElement("li");
-        item.textContent = nome;
-        lista.appendChild(item);
-        input.value = "";
+    let nome = input.value.trim();
+
+    if (!nome) {
+        alert("Digite um nome!");
+        return;
     }
+
+    if (/\d/.test(nome)) {
+        alert("O nome não pode conter números!");
+        return;
+    }
+
+    nome = nome.toLowerCase(); // Converte para minúsculo para comparação
+
+    if (nomesAdicionados.includes(nome)) {
+        alert("Este nome já foi adicionado!");
+        return;
+    }
+
+    const lista = document.getElementById("listaAmigos");
+    const item = document.createElement("li");
+    item.textContent = nome;
+
+    // Cria o botão de remoção
+    const botaoRemover = document.createElement("button");
+    botaoRemover.textContent = "❌"; // Emoji de "X"
+    botaoRemover.classList.add("button-remover"); // Adiciona uma classe para estilo
+    botaoRemover.onclick = function() {
+        lista.removeChild(item); // Remove o item da lista
+        nomesAdicionados = nomesAdicionados.filter(n => n !== nome); // Remove do array
+    };
+
+    item.appendChild(botaoRemover); // Adiciona o botão ao item da lista
+    lista.appendChild(item);
+
+    nomesAdicionados.push(nome); // Adiciona o nome ao array
+
+    input.value = "";
 }
+
 
 let confettiInstance = null;
 
@@ -62,49 +95,47 @@ function salvarListaSorteio(amigos, sorteados) {
   URL.revokeObjectURL(url); // Limpa o objeto URL
 }
 
+
 function sortearAmigo() {
-  const lista = document.getElementById("listaAmigos");
-  const amigos = Array.from(lista.children).map(li => li.textContent);
+    if (nomesAdicionados.length < 2) {
+        alert("Adicione pelo menos dois amigos para sortear!");
+        return;
+    }
 
-  if (amigos.length < 2) {
-    alert("Adicione pelo menos dois amigos para sortear!");
-    return;
-  }
+    const lista = document.getElementById("listaAmigos");
+    lista.style.display = "none";
 
-  lista.style.display = "none";
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = "";
 
-  const resultado = document.getElementById("resultado");
-  resultado.innerHTML = "";
+    const mensagem = document.createElement("div");
+    mensagem.classList.add("resultado-mensagem");
+    mensagem.innerHTML = "🎉 <strong>Resultado do Sorteio!!! Já podem comprar os presentes</strong> 🎉";
+    resultado.appendChild(mensagem);
 
-  const mensagem = document.createElement("div");
-  mensagem.classList.add("resultado-mensagem");
-  mensagem.innerHTML = "🎉 <strong>Resultado do Sorteio!!! Já podem comprar os presentes</strong> 🎉";
-  resultado.appendChild(mensagem);
+    let sorteados = [...nomesAdicionados];
+    sorteados = sorteados.sort(() => Math.random() - 0.5);
 
-  let sorteados = [...amigos];
-  sorteados = sorteados.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < nomesAdicionados.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = `${nomesAdicionados[i]} -> ${sorteados[(i + 1) % nomesAdicionados.length]}`;
+        resultado.appendChild(li);
+    }
 
-  for (let i = 0; i < amigos.length; i++) {
-    const li = document.createElement("li");
-    li.textContent = `${amigos[i]} -> ${sorteados[(i + 1) % amigos.length]}`;
-    resultado.appendChild(li);
-  }
+    soltarConfetes();
 
-  soltarConfetes();
+    // Esconde o botão "Sortear amigo"
+    document.querySelector(".button-draw").style.display = "none";
 
-  // Esconde o botão "Sortear amigo"
-  document.querySelector(".button-draw").style.display = "none";
+    // Mostra o botão "Baixar Lista"
+    const botaoBaixar = document.createElement("button");
+    botaoBaixar.textContent = "📃 Baixar Lista"; // Adicionado o emoji "📃"
+    botaoBaixar.classList.add("button-download"); // Adiciona uma classe para estilização
+    botaoBaixar.onclick = () => salvarListaSorteio(nomesAdicionados, sorteados);
+    document.querySelector(".button-container").appendChild(botaoBaixar);
 
-  // Mostra o botão "Baixar Lista"
-  const botaoBaixar = document.createElement("button");
-  botaoBaixar.textContent = "📃Baixar Lista";
-  botaoBaixar.classList.add("button-download"); // Adiciona uma classe para estilização
-  botaoBaixar.onclick = () => salvarListaSorteio(amigos, sorteados);
-  document.querySelector(".button-container").appendChild(botaoBaixar);
-
-  // Mostra o botão "Novo Sorteio"
-  document.getElementById("button-reset").style.display = "inline-block";
-
+    // Mostra o botão "Novo Sorteio"
+    document.getElementById("button-reset").style.display = "inline-block";
 }
 
 function reiniciarSorteio() {
@@ -115,6 +146,8 @@ function reiniciarSorteio() {
     listaAmigos.removeChild(listaAmigos.firstChild);
   }
   listaAmigos.style.display = "block";
+
+  nomesAdicionados = [];
 
   const resultado = document.getElementById("resultado");
   resultado.innerHTML = "";
@@ -130,3 +163,5 @@ function reiniciarSorteio() {
 
   document.getElementById("button-reset").style.display = "none";
 }
+
+
