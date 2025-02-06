@@ -6,20 +6,23 @@ function showAlert(message) {
     const customAlertOk = document.getElementById("custom-alert-ok");
 
     customAlertMessage.textContent = message;
+    customAlert.style.display = "flex"; // Exibe o modal imediatamente
 
-    if (responsiveVoice) {
-        responsiveVoice.speak(message, 'Brazilian Portuguese Female', { rate: 1.2 });
-    } else {
-        console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
-    }
-
-    customAlert.style.display = "flex"; // Exibe o modal
+    // Use setTimeout para dar prioridade à exibição antes de falar
+    setTimeout(() => {
+        if (responsiveVoice) {
+            responsiveVoice.speak(message, 'Brazilian Portuguese Female', { rate: 1.2 });
+        } else {
+            console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
+        }
+    }, 20); // Atraso de 50 milissegundos (ajuste conforme necessário)
 
     customAlertOk.onclick = function() {
         customAlert.style.display = "none"; // Oculta o modal
         document.getElementById("amigo").value = ""; // Limpa o input
     };
 }
+
 
 function validarSenha(senha) {
     if (!senha || senha.trim() === "") {
@@ -148,62 +151,6 @@ function setDisplay(elementIds, displayValue) {
 }
 
 
-
-// function sortearAmigo() {
-//     if (participantes.length < 2) {
-//         showAlert("Adicione pelo menos dois amigos para sortear!");
-//         return;
-//     }
-
-//     const lista = document.getElementById("listaAmigos");
-//     lista.style.display = "none";
-
-//     // Oculta os elementos de entrada
-//     setDisplay(["titulo-amigos", "input-wrapper", "amigo", "senha", "botao-adicionar"], "none");
-
-//     const resultado = document.getElementById("resultado");
-//     resultado.innerHTML = "";
-
-//     const mensagem = document.createElement("div");
-//     mensagem.classList.add("resultado-mensagem");
-//     mensagem.innerHTML = "🎉 <strong>Resultado do Sorteio!!! Já podem comprar os presentes</strong> 🎉";
-//     resultado.appendChild(mensagem);
-
-//     // Embaralha os participantes para o sorteio
-//     let sorteados = [...participantes];
-//     sorteados = sorteados.sort(() => Math.random() - 0.5);
-
-//     // Cria um objeto para armazenar os resultados do sorteio (nome -> quem tirou)
-//     const resultadosSorteio = {};
-//     for (let i = 0; i < participantes.length; i++) {
-//         resultadosSorteio[participantes[i].nome] = sorteados[(i + 1) % participantes.length].nome;
-//     }
-
-//     // Para cada participante, mostra um botão para verificar o resultado com a senha
-//     participantes.forEach(participante => {
-//         const botaoVerificar = document.createElement("button");
-//         botaoVerificar.textContent = `Verificar sorteio de ${participante.nome}`;
-//         botaoVerificar.classList.add("button-verificar");
-//         botaoVerificar.onclick = () => verificarSenha(participante.nome, resultadosSorteio[participante.nome]);
-//         resultado.appendChild(botaoVerificar);
-//     });
-
-//     soltarConfetes();
-
-//     // Toca o som de alegria
-//     const audioAlegria = document.getElementById("audio-alegria");
-//     if (audioAlegria) {
-//         audioAlegria.play();
-//     }
-
-//     // Esconde o botão "Sortear amigo"
-//     document.querySelector(".button-draw").style.display = "none";
-
-//     // Mostra o botão "Novo Sorteio"
-//     document.getElementById("button-reset").style.display = "inline-block";
-// }
-
-
 function sortearAmigo() {
     if (participantes.length < 2) {
         showAlert("Adicione pelo menos dois amigos para sortear!");
@@ -319,7 +266,7 @@ function reiniciarSorteio() {
 
     // Fala "Amigo secreto. Digite o nome dos seus amigos." ao reiniciar
     if (responsiveVoice) {
-        responsiveVoice.speak("Amigo secreto. Digite o nome dos seus amigos.", 'Brazilian Portuguese Female', { rate: 1.2 });
+        responsiveVoice.speak("Caixa do amigo secreto. Digite o nome dos seus amigos para começar.", 'Brazilian Portuguese Female', { rate: 1.2 });
     } else {
         console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
     }

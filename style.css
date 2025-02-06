@@ -1,12 +1,21 @@
+/* Reset CSS */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho do elemento */
+}
+
 body {
-    background: linear-gradient(to bottom, #5e5e5e, #090a0b); /* Gradiente do cinza para o azul */
+    background: linear-gradient(to bottom, #5e5e5e, #090a0b);
     color: #ffffff;
     font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Garante que o body tenha pelo menos a altura da tela */
     margin: 0;
+    padding-bottom: 40px; /* Adiciona um padding inferior para evitar sobreposição com o footer (ajuste o valor) */
 }
 
 .main-content {
@@ -18,6 +27,10 @@ body {
     padding: 20px;
     box-shadow: 0 4px 10px rgba(250, 250, 250, 0.641);
     text-align: center;
+
+    display: flex;          /* Adiciona flexbox */
+    flex-direction: column; /* Organiza os itens em coluna */
+    align-items: center;    /* Centraliza os itens horizontalmente */
 }
 
 .main-title {
@@ -85,17 +98,23 @@ body {
 .button-draw img {
     width: 20px;
 }
-.name-list, .result-list {
+
+.name-list {
     list-style: none;
     padding: 0;
     margin-top: 15px;
+    max-height: 250px; /* Defina uma altura máxima para a lista */
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical quando necessário */
+    justify-content: center; /* Centraliza horizontalmente */
 }
+
 .name-list li, .result-list li {
     display: flex;
     background: rgba(255, 255, 255, 0.2);
     padding: 10px;
     border-radius: 10px;
     margin-top: 5px;
+    justify-content: center; /* Centraliza horizontalmente */
 }
 
 .result-list li {
@@ -108,6 +127,7 @@ body {
     color: #ffffff; /* Define a cor do texto */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra ao texto */
     justify-content: center; /* Centraliza o texto horizontalmente */
+    
 }
 
 .resultado-mensagem {
@@ -211,18 +231,18 @@ body {
     cursor: pointer;
 }
 
-/* Estilos para o rodapé */
 .footer {
     text-align: center;
     padding: 5px;
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo transparente */
+    background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     font-size: 0.8em;
-    backdrop-filter: blur(20px); /* Aumenta o desfoque para um efeito de vidro mais forte */
+    backdrop-filter: blur(20px);
+    z-index: 100; /* Garante que o footer fique sempre na frente */
 }
 
 /* Oculta a notificação inicialmente */
@@ -286,8 +306,15 @@ body {
     transition: 0.3s;
     font-size: 16px;
     margin-top: 5px; /* Espaçamento entre botões */
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .button-verificar:hover {
     background: #3cb371; /* Cor mais clara no hover */
+}
+
+.section-title {
+    margin-bottom: 15px; 
 }
