@@ -10,6 +10,25 @@ function adicionarAmigo() {
     }
 }
 
+// function sortearAmigo() {
+//     const lista = document.getElementById("listaAmigos");
+//     const amigos = Array.from(lista.children).map(li => li.textContent);
+//     if (amigos.length < 2) {
+//         alert("Adicione pelo menos dois amigos para sortear!");
+//         return;
+//     }
+//     const resultado = document.getElementById("resultado");
+//     resultado.innerHTML = "";
+//     let sorteados = [...amigos];
+//     sorteados = sorteados.sort(() => Math.random() - 0.5);
+//     for (let i = 0; i < amigos.length; i++) {
+//         const li = document.createElement("li");
+//         li.textContent = `${amigos[i]} -> ${sorteados[(i + 1) % amigos.length]}`;
+//         resultado.appendChild(li);
+//     }
+//     soltarConfetes();
+// }
+
 function sortearAmigo() {
     const lista = document.getElementById("listaAmigos");
     const amigos = Array.from(lista.children).map(li => li.textContent);
@@ -17,8 +36,19 @@ function sortearAmigo() {
         alert("Adicione pelo menos dois amigos para sortear!");
         return;
     }
+    
+    // Esconder a lista de amigos
+    lista.style.display = "none";
+    
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = "";
+    
+    // Criar mensagem destacada
+    const mensagem = document.createElement("div");
+    mensagem.classList.add("resultado-mensagem");
+    mensagem.innerHTML = "🎉 <strong>Resultado do Sorteio!!! Já podem comprar os presentes</strong> 🎉";
+    resultado.appendChild(mensagem);
+    
     let sorteados = [...amigos];
     sorteados = sorteados.sort(() => Math.random() - 0.5);
     for (let i = 0; i < amigos.length; i++) {
@@ -28,6 +58,7 @@ function sortearAmigo() {
     }
     soltarConfetes();
 }
+
 
 function soltarConfetes() {
     const confettiSettings = {

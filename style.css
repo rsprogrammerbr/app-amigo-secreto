@@ -86,8 +86,21 @@ body {
     margin-top: 15px;
 }
 .name-list li, .result-list li {
+    display: flex;
     background: rgba(255, 255, 255, 0.2);
     padding: 10px;
     border-radius: 10px;
     margin-top: 5px;
+}
+
+.resultado-mensagem {
+    color: rgb(18, 216, 18);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
 }
