@@ -39,8 +39,36 @@ body {
 
     position: relative; 
     z-index: 1; 
+}
 
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 60px; /* Aumenta o padding inferior no celular para o footer */
+    }
 
+    .main-content {
+        width: 90%; /* O main-content ocupa mais largura da tela no celular */
+        max-width: none; /* Remove a largura máxima para se adaptar à tela */
+        padding: 15px; /* Reduz o padding para ocupar menos espaço */
+    }
+
+    .header-banner img {
+        width: 100%; /* A imagem ocupa toda a largura no celular */
+    }
+
+    .input-wrapper {
+        flex-direction: column; /* Os inputs ficam um embaixo do outro no celular */
+        align-items: center; /* Centraliza os itens */
+    }
+
+    .input-name {
+        width: 100%; /* Os inputs ocupam toda a largura disponível */
+        margin-bottom: 10px; /* Adiciona um espaço entre os inputs */
+    }
+
+    .footer {
+        font-size: 0.7em; /* Diminui o tamanho da fonte no footer */
+    }
 }
 
 .main-title {
