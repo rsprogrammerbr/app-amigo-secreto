@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
+    background: linear-gradient(to bottom, #5e5e5e, #090a0b); /* Gradiente do cinza para o azul */
     color: #ffffff;
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -10,14 +10,19 @@ body {
 }
 
 .main-content {
-    width: 90%;
+    width: 70%;
     max-width: 500px;
     background: rgba(255, 255, 255, 0.1); /* Transparente */
-    backdrop-filter: blur(50px); /* Aumenta o efeito de blur */
+    backdrop-filter: blur(10px); /* Aumenta o efeito de blur */
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(250, 250, 250, 0.641);
     text-align: center;
+}
+
+.main-title {
+    font-size: 3em; /* Aumenta o tamanho da fonte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra */
 }
 
 .header-banner img {
@@ -91,6 +96,18 @@ body {
     padding: 10px;
     border-radius: 10px;
     margin-top: 5px;
+}
+
+.result-list li {
+    display: flex;
+    background: rgba(212, 212, 212, 0.2); /* Fundo transparente */
+    padding: 15px; /* Aumenta o preenchimento */
+    border-radius: 15px; /* Arredonda as bordas */
+    margin-top: 10px; /* Aumenta o espaçamento entre os itens */
+    font-size: 1.2em; /* Aumenta o tamanho da fonte */
+    color: #ffffff; /* Define a cor do texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra ao texto */
+    justify-content: center; /* Centraliza o texto horizontalmente */
 }
 
 .resultado-mensagem {
@@ -192,4 +209,68 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Estilos para o rodapé */
+.footer {
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo transparente */
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.8em;
+    backdrop-filter: blur(20px); /* Aumenta o desfoque para um efeito de vidro mais forte */
+}
+
+/* Oculta a notificação inicialmente */
+.rvnotification {
+    display: none !important;
+}
+
+/* Estilos para a notificação do responsiveVoice */
+.rvnotification.customized {
+    display: flex !important; /* Exibe a notificação personalizada */
+    background-color: #f0f8ff !important; /* Cor da caixa de alerta */
+    color: #000 !important; /* Cor do texto */
+    border: none !important; /* Remove a borda */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important; /* Adiciona uma sombra */
+    padding: 10px !important; /* Adiciona um preenchimento */
+    border-radius: 5px !important; /* Adiciona um raio de borda */
+    justify-content: center !important; /* Centraliza o conteúdo */
+    align-items: center !important; /* Alinha os itens verticalmente */
+    flex-direction: column !important; /* Coloca os itens em coluna */
+    position: fixed !important; /* Fixa a posição */
+    top: 10px !important; /* Distância do topo */
+    left: 50% !important; /* Centraliza horizontalmente */
+    transform: translateX(-50%) !important; /* Ajusta o posicionamento */
+}
+
+.rvnotification .rvtext {
+    font-size: 1em !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+.rvnotification .custom-rv-button {
+    background-color: #4CAF50 !important; /* Cor verde para os botões */
+    color: white !important;
+    border: none !important;
+    padding: 0.5em 1em !important;
+    margin: 0.5em !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    font-size: 1em !important;
+}
+
+.rvnotification .custom-rv-button.deny {
+    background-color: #f44336 !important; /* Cor vermelha para o botão "Não" */
+}
+
+/* Estilos para ocultar os botões padrão */
+.rvnotification .rvallow,
+.rvnotification .rvdeny {
+    display: none !important;
 }

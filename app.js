@@ -227,3 +227,4 @@ function showAlert(message) {
         document.getElementById("amigo").value = ""; // Limpa o input
     };
 }
+
