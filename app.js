@@ -1,4 +1,4 @@
-let participantes = []; // Array para armazenar os participantes (nome e senha)
+let participantes = []; 
 
 function showAlert(message) {
     const customAlert = document.getElementById("custom-alert");
@@ -6,20 +6,20 @@ function showAlert(message) {
     const customAlertOk = document.getElementById("custom-alert-ok");
 
     customAlertMessage.textContent = message;
-    customAlert.style.display = "flex"; // Exibe o modal imediatamente
+    customAlert.style.display = "flex"; 
 
-    // Use setTimeout para dar prioridade à exibição antes de falar
+    
     setTimeout(() => {
         if (responsiveVoice) {
             responsiveVoice.speak(message, 'Brazilian Portuguese Female', { rate: 1.2 });
         } else {
             console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
         }
-    }, 20); // Atraso de 50 milissegundos (ajuste conforme necessário)
+    }, 20); 
 
     customAlertOk.onclick = function() {
-        customAlert.style.display = "none"; // Oculta o modal
-        document.getElementById("amigo").value = ""; // Limpa o input
+        customAlert.style.display = "none"; 
+        document.getElementById("amigo").value = ""; 
     };
 }
 
@@ -28,7 +28,7 @@ function validarSenha(senha) {
     if (!senha || senha.trim() === "") {
         return "Por favor, digite uma senha.";
     }
-    return null; // Retorna null se a senha for válida
+    return null; 
 }
 
 function adicionarAmigo() {
@@ -47,11 +47,11 @@ function adicionarAmigo() {
         return;
     }
 
-    // Validação da senha
+    
     const senhaInvalida = validarSenha(senha);
     if (senhaInvalida) {
-        showAlert(senhaInvalida); // Exibe a mensagem de erro da senha
-        return; // Impede a adição do amigo
+        showAlert(senhaInvalida); 
+        return; 
     }
 
     if (/\d/.test(nome)) {
@@ -59,7 +59,7 @@ function adicionarAmigo() {
         return;
     }
 
-    nome = nome.toLowerCase(); // Converte para minúsculo para comparação
+    nome = nome.toLowerCase(); 
 
     if (participantes.find(p => p.nome === nome)) {
         showAlert("Este nome já foi adicionado!");
@@ -70,19 +70,19 @@ function adicionarAmigo() {
     const item = document.createElement("li");
     item.textContent = nome;
 
-    // Cria o botão de remoção
+    
     const botaoRemover = document.createElement("button");
-    botaoRemover.textContent = "❌"; // Emoji de "X"
-    botaoRemover.classList.add("button-remover"); // Adiciona uma classe para estilo
+    botaoRemover.textContent = "❌"; 
+    botaoRemover.classList.add("button-remover"); 
     botaoRemover.onclick = function() {
-        lista.removeChild(item); // Remove o item da lista
-        participantes = participantes.filter(p => p.nome !== nome); // Remove do array
+        lista.removeChild(item); 
+        participantes = participantes.filter(p => p.nome !== nome);
     };
 
-    item.appendChild(botaoRemover); // Adiciona o botão ao item da lista
+    item.appendChild(botaoRemover); 
     lista.appendChild(item);
 
-    participantes.push({ nome: nome, senha: senha }); // Armazena nome e senha
+    participantes.push({ nome: nome, senha: senha }); 
 
     inputNome.value = "";
     inputSenha.value = "";
@@ -134,10 +134,10 @@ function salvarListaSorteio(amigos, sorteados) {
   const link = document.createElement('a');
   link.href = url;
   link.download = `lista_amigo_secreto_${new Date().toLocaleDateString().replace(/\//g, '-')}.txt`;
-  document.body.appendChild(link); // Necessário para Firefox
+  document.body.appendChild(link); 
   link.click();
   document.body.removeChild(link);
-  URL.revokeObjectURL(url); // Limpa o objeto URL
+  URL.revokeObjectURL(url); 
 }
 
 
@@ -150,8 +150,6 @@ function setDisplay(elementIds, displayValue) {
     });
 }
 
-
-
 function sortearAmigo() {
     if (participantes.length < 2) {
         showAlert("Adicione pelo menos dois amigos para sortear!");
@@ -161,7 +159,7 @@ function sortearAmigo() {
     const lista = document.getElementById("listaAmigos");
     lista.style.display = "none";
 
-    // Oculta os elementos de entrada
+    
     setDisplay(["titulo-amigos", "input-wrapper", "amigo", "senha", "botao-adicionar"], "none");
 
     const resultado = document.getElementById("resultado");
@@ -172,42 +170,53 @@ function sortearAmigo() {
     mensagem.innerHTML = "🎉 <strong>Resultado do Sorteio!!! Já podem comprar os presentes</strong> 🎉";
     resultado.appendChild(mensagem);
 
-    // Embaralha os participantes para o sorteio
     let sorteados = [...participantes];
-    sorteados = sorteados.sort(() => Math.random() - 0.5);
+    let resultadosSorteio = {};
+    let sorteioValido = false;
 
-    // Cria um objeto para armazenar os resultados do sorteio (nome -> quem tirou)
-    const resultadosSorteio = {};
-    for (let i = 0; i < participantes.length; i++) {
-        resultadosSorteio[participantes[i].nome] = sorteados[(i + 1) % participantes.length].nome;
+    
+    while (!sorteioValido) {
+        sorteados = [...participantes].sort(() => Math.random() - 0.5); 
+        sorteioValido = true; 
+        resultadosSorteio = {}; 
+
+        for (let i = 0; i < participantes.length; i++) {
+            const participante = participantes[i];
+            const amigoSorteado = sorteados[(i + 1) % participantes.length];
+
+            if (participante.nome === amigoSorteado.nome) {
+                sorteioValido = false; 
+                break; 
+            }
+
+            resultadosSorteio[participante.nome] = amigoSorteado.nome;
+        }
     }
 
+    
     participantes.forEach(participante => {
         const botaoVerificar = document.createElement("button");
         botaoVerificar.textContent = `Verificar sorteio de ${participante.nome}`;
         botaoVerificar.classList.add("button-verificar");
-        botaoVerificar.onclick = function() { // Mudança aqui
-            verificarSenha(participante.nome, resultadosSorteio[participante.nome]);
-        };
+        botaoVerificar.onclick = () => verificarSenha(participante.nome, resultadosSorteio[participante.nome]);
         resultado.appendChild(botaoVerificar);
     });
 
-
     soltarConfetes();
 
-    // Toca o som de alegria
+    
     const audioAlegria = document.getElementById("audio-alegria");
     if (audioAlegria) {
         audioAlegria.play();
     }
 
-    // Esconde o botão "Sortear amigo"
+    
     document.querySelector(".button-draw").style.display = "none";
 
-    // Mostra o botão "Novo Sorteio"
+    
     document.getElementById("button-reset").style.display = "inline-block";
 
-    // Usa o responsiveVoice para falar o resultado
+    
     if (responsiveVoice) {
         responsiveVoice.speak("Resultado do Sorteio!!! Já podem comprar os presentes", 'Brazilian Portuguese Female', { rate: 1.2 });
     } else {
@@ -225,24 +234,24 @@ function reiniciarSorteio() {
     }
     listaAmigos.style.display = "block";
 
-    participantes = []; // Limpa o array de participantes
+    participantes = []; 
 
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = "";
 
-    // Mostra novamente o botão "Sortear amigo"
+    
     document.querySelector(".button-draw").style.display = "flex";
 
     document.getElementById("button-reset").style.display = "none";
 
-    // Mostra os elementos de entrada novamente
+    
     setDisplay(["titulo-amigos"], "block");
     setDisplay(["input-wrapper"], "flex");
     setDisplay(["amigo"], "block");
-    setDisplay(["senha"], "block"); // Mostra o campo de senha
+    setDisplay(["senha"], "block"); 
     setDisplay(["botao-adicionar"], "inline-block");
 
-    // Fala "Amigo secreto. Digite o nome dos seus amigos." ao reiniciar
+    
     if (responsiveVoice) {
         responsiveVoice.speak("Caixa do amigo secreto. Digite o nome dos seus amigos para começar.", 'Brazilian Portuguese Female', { rate: 1.2 });
     } else {
@@ -257,10 +266,10 @@ function mostrarResultado(message) {
     const customAlertOk = document.getElementById("custom-alert-ok");
 
     customAlertMessage.textContent = message;
-    customAlert.style.display = "flex"; // Exibe o modal
+    customAlert.style.display = "flex"; 
 
     customAlertOk.onclick = function() {
-        customAlert.style.display = "none"; // Oculta o modal
+        customAlert.style.display = "none"; 
     };
 }
 
@@ -270,7 +279,7 @@ function verificarSenha(nome, amigoSorteado) {
     const participante = participantes.find(p => p.nome === nome);
 
     if (participante && senha === participante.senha) {
-        mostrarResultado(`${nome} tirou ${amigoSorteado}!`); // Usa a nova função
+        mostrarResultado(`${nome} tirou ${amigoSorteado}!`); 
 
     } else {
         showAlert("Senha incorreta!");
