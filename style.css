@@ -158,3 +158,38 @@ body {
     color: #dc143c; /* Vermelho mais escuro no hover */
 }
 
+
+/* Estilos para o modal personalizado */
+.custom-alert {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-alert-content {
+    background-color: #4f46e5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #4f46e5;
+    text-align: center;
+}
+
+.custom-alert-content p {
+    margin-bottom: 15px;
+}
+
+.custom-alert-content button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

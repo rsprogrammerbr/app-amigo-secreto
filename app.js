@@ -5,22 +5,19 @@ function adicionarAmigo() {
     let nome = input.value.trim();
 
     if (!nome) {
-        alert("Digite um nome!");
-        document.getElementById("amigo").value = "";
+        showAlert("Digite um nome!");
         return;
     }
 
     if (/\d/.test(nome)) {
-        alert("O nome não pode conter números!");
-        document.getElementById("amigo").value = "";
+        showAlert("O nome não pode conter números!");
         return;
     }
 
     nome = nome.toLowerCase(); // Converte para minúsculo para comparação
 
     if (nomesAdicionados.includes(nome)) {
-        alert("Este nome já foi adicionado!");
-        document.getElementById("amigo").value = "";
+        showAlert("Este nome já foi adicionado!");
         return;
     }
 
@@ -44,6 +41,7 @@ function adicionarAmigo() {
 
     input.value = "";
 }
+
 
 
 let confettiInstance = null;
@@ -111,8 +109,7 @@ function setDisplay(elementIds, displayValue) {
 
 function sortearAmigo() {
     if (nomesAdicionados.length < 2) {
-        alert("Adicione pelo menos dois amigos para sortear!");
-        document.getElementById("amigo").value = ""; // Limpa o input
+        showAlert("Adicione pelo menos dois amigos para sortear!");
         return;
     }
 
@@ -171,8 +168,6 @@ function sortearAmigo() {
     }
 }
 
-
-
 function reiniciarSorteio() {
     pararConfetes();
 
@@ -203,4 +198,32 @@ function reiniciarSorteio() {
     setDisplay(["input-wrapper"], "flex");
     setDisplay(["amigo"], "block");
     setDisplay(["botao-adicionar"], "inline-block");
+
+    // Fala "Amigo secreto. Digite o nome dos seus amigos." ao reiniciar
+    if (responsiveVoice) {
+        responsiveVoice.speak("Amigo secreto. Digite o nome dos seus amigos.", 'Brazilian Portuguese Female', { rate: 1.2 });
+    } else {
+        console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
+    }
+}
+
+function showAlert(message) {
+    const customAlert = document.getElementById("custom-alert");
+    const customAlertMessage = document.getElementById("custom-alert-message");
+    const customAlertOk = document.getElementById("custom-alert-ok");
+
+    customAlertMessage.textContent = message;
+
+    if (responsiveVoice) {
+        responsiveVoice.speak(message, 'Brazilian Portuguese Female', { rate: 1.2 });
+    } else {
+        console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
+    }
+
+    customAlert.style.display = "flex"; // Exibe o modal
+
+    customAlertOk.onclick = function() {
+        customAlert.style.display = "none"; // Oculta o modal
+        document.getElementById("amigo").value = ""; // Limpa o input
+    };
 }
