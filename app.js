@@ -108,10 +108,11 @@ function setDisplay(elementIds, displayValue) {
     });
 }
 
+
 function sortearAmigo() {
     if (nomesAdicionados.length < 2) {
         alert("Adicione pelo menos dois amigos para sortear!");
-        document.getElementById("amigo").value = "";
+        document.getElementById("amigo").value = ""; // Limpa o input
         return;
     }
 
@@ -132,13 +133,22 @@ function sortearAmigo() {
     let sorteados = [...nomesAdicionados];
     sorteados = sorteados.sort(() => Math.random() - 0.5);
 
+    let textoParaFalar = ""; // Inicializa a string para a fala
+
     for (let i = 0; i < nomesAdicionados.length; i++) {
         const li = document.createElement("li");
         li.textContent = `${nomesAdicionados[i]} -> ${sorteados[(i + 1) % nomesAdicionados.length]}`;
         resultado.appendChild(li);
+        textoParaFalar += `${nomesAdicionados[i]} dá presente para ${sorteados[(i + 1) % nomesAdicionados.length]}, `; // Adiciona ao texto para a fala
     }
 
     soltarConfetes();
+
+    // Toca o som de alegria
+    const audioAlegria = document.getElementById("audio-alegria");
+    if (audioAlegria) {
+        audioAlegria.play();
+    }
 
     // Esconde o botão "Sortear amigo"
     document.querySelector(".button-draw").style.display = "none";
@@ -152,7 +162,16 @@ function sortearAmigo() {
 
     // Mostra o botão "Novo Sorteio"
     document.getElementById("button-reset").style.display = "inline-block";
+
+    // Usa o responsiveVoice para falar o resultado
+    if (responsiveVoice) {
+        responsiveVoice.speak("Resultado do Sorteio!!! Já podem comprar os presentes. " + textoParaFalar, 'Brazilian Portuguese Female', { rate: 1.2 });
+    } else {
+        console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
+    }
 }
+
+
 
 function reiniciarSorteio() {
     pararConfetes();

@@ -40,7 +40,18 @@
             
         </section>
     </main>
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+    <script>
+        window.onload = function() {
+          if (responsiveVoice) {
+            responsiveVoice.speak("Bem vindo ao amigo secreto. Digite o nome dos seus amigos.", 'Brazilian Portuguese Female', { rate: 1.2 });
+          } else {
+            console.error("responsiveVoice não está definido. Verifique se a biblioteca foi carregada corretamente.");
+          }
+        };
+      </script>
     <script src="/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/confetti-js"></script>
+    <audio id="audio-alegria" src="assets/audio_alegria.mp3" preload="auto"></audio>
 </body>
 </html>
