@@ -67,7 +67,7 @@ App Caixa do Amigo Secreto é uma aplicação web projetada para modernizar a tr
 
 ![Screenshot_3](https://github.com/user-attachments/assets/3d3d0890-7475-40ca-9eda-36a76fffa2c7)
 
-
+[🎥 Assista ao vídeo Explicativo](https://github.com/user-attachments/assets/5989d453-6d8f-496c-88d2-f9e36a5f8014)
 
 ## Melhorias Futuras
 - **Design Aprimorado**: Adicionar mais temas visuais ou opções de personalização para os usuários.
