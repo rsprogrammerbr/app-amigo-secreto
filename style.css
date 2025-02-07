@@ -10,7 +10,7 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, input, textarea, button {
 body {
     background-image: 
         
-        url('assets/background_presentes.PNG'); /* Define a imagem de fundo */
+        url('/assets/background_presentes.png'); /* Define a imagem de fundo */        
     background-size: cover; /* Garante que a imagem cubra todo o body */
     background-repeat: no-repeat; /* Evita que a imagem se repita */
     background-attachment: fixed; /* Mantém a imagem fixa durante a rolagem */
